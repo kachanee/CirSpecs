@@ -1,0 +1,98 @@
+/* ===========================================================================
+   CirSpecs — design tokens
+   One place for colour, type, spacing, motion. Nothing else defines a raw
+   hex value or a raw pixel size; everything downstream reads from here.
+   =========================================================================== */
+
+:root{
+  color-scheme:light;
+
+  /* --- surfaces ---------------------------------------------------------- */
+  --paper:#FFFFFF;
+  --sand:#F3EFE8;          /* page background, warm off-white */
+  --sand-2:#E9E3D8;        /* image wells, inset panels */
+  --line:#DBD4C8;          /* hairlines on sand */
+  --line-2:#EDE8DF;        /* hairlines on paper */
+
+  /* --- ink --------------------------------------------------------------- */
+  --ink:#131210;           /* headings, primary text */
+  --ink-2:#4E4A44;         /* body copy */
+  --ink-3:#7E786F;         /* captions, meta */
+  --ink-on-dark:#FFFFFF;
+  --ink-on-dark-2:rgba(255,255,255,.74);
+
+  /* --- brand ------------------------------------------------------------- */
+  --brand:#0C5C3D;         /* CirSpecs green: primary actions, logo */
+  --brand-dark:#07402A;
+  --brand-tint:#E3EFE8;
+  --brand-line:#BCD8C8;
+
+  /* --- editorial blocks -------------------------------------------------- */
+  --sun:#FFD400;           /* the yellow panel */
+  --brick:#9E2B25;
+  --clay:#DE5B1F;
+  --navy:#153A5C;
+  --plum:#5A3769;
+  --cream:#F6E7C8;
+
+  /* --- semantic ---------------------------------------------------------- */
+  --price:#C8102E;         /* the reduced price, always this red */
+  --warn:#A75E12;
+  --warn-bg:#FDF3E2;
+  --danger:#B3261E;
+  --danger-bg:#FBECEA;
+  --ai:#5A3769;
+  --ai-bg:#F2ECF6;
+
+  /* --- type -------------------------------------------------------------- */
+  --font:"Noto Sans","Noto Sans SC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+
+  --t-micro:.6875rem;                          /* 11px — eyebrows, tags */
+  --t-xs:.75rem;                               /* 12px — meta */
+  --t-sm:.8125rem;                             /* 13px — captions */
+  --t-base:.9375rem;                           /* 15px — body */
+  --t-md:1.0625rem;                            /* 17px — lede */
+  --t-lg:clamp(1.25rem,1.1rem + .7vw,1.5rem);  /* card headings */
+  --t-xl:clamp(1.6rem,1.3rem + 1.5vw,2.25rem); /* section headings */
+  --t-2xl:clamp(2rem,1.4rem + 3vw,3.25rem);    /* tile headlines */
+  --t-3xl:clamp(2.4rem,1.5rem + 4.4vw,4.5rem); /* hero */
+
+  --tight:-.035em;
+  --wide:.08em;
+
+  /* --- space ------------------------------------------------------------- */
+  --sp-1:4px;  --sp-2:8px;  --sp-3:12px; --sp-4:16px; --sp-5:20px;
+  --sp-6:24px; --sp-7:32px; --sp-8:40px; --sp-9:56px; --sp-10:80px;
+
+  --gutter:8px;                                /* the white seam in the mosaic */
+  --shell:1360px;
+  --shell-pad:clamp(16px,3vw,28px);
+
+  /* --- shape & depth ----------------------------------------------------- */
+  --r-flat:0;              /* tiles and panels are square, like a printed page */
+  --r-sm:4px;              /* inputs */
+  --r-pill:999px;          /* every button */
+
+  --sh-1:0 1px 2px rgba(19,18,16,.06);
+  --sh-2:0 6px 18px -8px rgba(19,18,16,.22);
+  --sh-3:0 18px 44px -18px rgba(19,18,16,.34);
+  --sh-4:0 32px 70px -24px rgba(19,18,16,.45);
+
+  /* --- motion ------------------------------------------------------------ */
+  --ease:cubic-bezier(.22,1,.36,1);
+  --fast:.16s;
+  --mid:.28s;
+  --slow:.44s;
+
+  /* --- layers ------------------------------------------------------------ */
+  --z-rail:40;
+  --z-header:70;
+  --z-clock:60;
+  --z-scrim:95;
+  --z-drawer:100;
+  --z-toast:130;
+}
+
+@media (prefers-reduced-motion:reduce){
+  :root{ --fast:.001ms; --mid:.001ms; --slow:.001ms; }
+}
