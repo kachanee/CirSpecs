@@ -6,7 +6,7 @@
 <title>CirSpecs — Still good. Priced differently.</title>
 <meta name="description" content="Genuine branded groceries close to their date, 20–65% below shelf price. The price falls on its own as the days run down, and stops at the floor the shop sets.">
 <meta name="theme-color" content="#0C5C3D">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230C5C3D'/><path d='M14 25a8 8 0 0 1-1.4-16C19 8 20.5 7.4 22.5 5c1 2 2 4.2 2 8 0 5.5-4.8 10-10.5 12Z' fill='%23FFD400'/></svg>">
+<link rel="icon" type="image/png" href="assets/img/mark.png">
 
 <meta property="og:title" content="CirSpecs — Still good. Priced differently.">
 <meta property="og:description" content="A near-date grocery marketplace where the price falls with the days left, and stops at the floor the shop sets.">
@@ -36,12 +36,7 @@
 <header class="masthead">
   <div class="shell masthead__in">
     <a class="wordmark" href="#/" aria-label="CirSpecs, home">
-      <span class="wordmark__mark" aria-hidden="true">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFD400" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
-          <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
-        </svg>
-      </span>
+      <span class="wordmark__mark" aria-hidden="true"><img src="assets/img/mark.png" alt="" width="40" height="40"></span>
       <span>CirSpecs<small>near-date market</small></span>
     </a>
 
@@ -122,12 +117,13 @@
           <li><a href="#pricing">Delisting thresholds</a></li>
           <li><a href="#voices">User research</a></li>
           <li><a href="#/orders">Your orders</a></li>
+          <li><a href="#/seller">Seller console</a></li>
+          <li><a href="#/db">Demo database</a></li>
         </ul>
       </div>
       <div>
         <h3>About this demo</h3>
-        <p>Front end only. The basket, saved items and orders live in this browser.
-           No server, no account, no real payment.</p>
+        <p>Front end plus a demo database that lives in this browser (see the Demo database page). No server, no account, no real payment.</p>
       </div>
     </div>
     <p class="sitefoot__rule">
@@ -183,8 +179,10 @@
 
 <script src="assets/js/data.js"></script>
 <script src="assets/js/pricing.js"></script>
+<script src="assets/js/db.js"></script>
 <script src="assets/js/store.js"></script>
 <script src="assets/js/components.js"></script>
+<script src="assets/js/views.js"></script>
 <script src="assets/js/app.js"></script>
 </body>
 </html>
