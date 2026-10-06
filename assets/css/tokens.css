@@ -22,15 +22,15 @@
   --ink-on-dark-2:rgba(255,255,255,.74);
 
   /* --- brand ------------------------------------------------------------- */
-  --brand:#0F8050;         /* CirSpecs green: primary actions, logo */
-  --brand-dark:#0A5F3B;
+  --brand:#0B6B42;         /* CirSpecs green: primary actions, logo */
+  --brand-dark:#07492C;
   --brand-tint:#E2F4EA;
   --brand-line:#B7E0C8;
 
   /* --- editorial blocks -------------------------------------------------- */
-  --sun:#F3D567;           /* the yellow panel */
-  --brick:#1D63A8;
-  --clay:#1F8F5F;
+  --sun:#43B57B;           /* the yellow panel */
+  --brick:#075133;
+  --clay:#0B6B42;
   --navy:#0E4A7B;
   --plum:#2F6FB5;
   --cream:#E2F1FA;
