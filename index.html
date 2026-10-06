@@ -277,6 +277,42 @@ footer p{line-height:1.7}
 .toast.on{transform:translateX(-50%)}
 .view{animation:fade .3s ease}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.av{position:relative;overflow:hidden}
+.av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fb__w .av{width:46px;height:46px;flex:0 0 46px}
+.ai{display:inline-block;vertical-align:middle;margin-left:8px;padding:3px 10px;border-radius:var(--rf);background:var(--imp-bg);color:var(--imp);font-size:.68rem;font-weight:700;letter-spacing:.04em;border:1px solid #DDD6FE;font-family:var(--body)}
+.fy__bar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:16px 0 20px}
+.fy__bar .seg{flex-wrap:wrap}
+.fy__bar small{font-size:.8rem;color:var(--n500)}
+.rec{display:flex;flex-direction:column;gap:9px}
+.rec .pc{flex:1}
+.recwhy{font-size:.78rem;line-height:1.45;color:var(--n600);background:var(--imp-bg);border-radius:var(--r2);padding:8px 11px}
+.recwhy b{color:var(--imp)}
+.don{background:linear-gradient(180deg,var(--p50),#fff 70%)}
+.don__top{display:grid;grid-template-columns:5fr 6fr;gap:30px;align-items:center;margin-bottom:30px}
+@media(max-width:900px){.don__top{grid-template-columns:1fr}}
+.don__img{position:relative;border-radius:var(--r5);overflow:hidden;aspect-ratio:4/3;box-shadow:var(--s3);background:var(--p100)}
+.don__img img{width:100%;height:100%;object-fit:cover}
+.don__img span{position:absolute;left:12px;bottom:12px;background:rgba(20,41,61,.72);color:#fff;font-size:.7rem;padding:4px 10px;border-radius:var(--rf)}
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}
+.stat{background:#fff;border:1px solid var(--p200);border-radius:var(--r3);padding:12px 16px;min-width:120px}
+.stat b{display:block;font-family:var(--disp);font-size:1.4rem;color:var(--p700)}
+.stat span{font-size:.74rem;color:var(--n500)}
+.dsteps{display:grid;gap:9px;margin-top:6px}
+.dsteps p{display:flex;gap:11px;align-items:flex-start;font-size:.86rem;line-height:1.5;color:var(--n600)}
+.dsteps i{flex:0 0 24px;height:24px;border-radius:50%;background:var(--p600);color:#fff;font-style:normal;font-weight:700;font-size:.76rem;display:grid;place-items:center;font-family:var(--disp)}
+.partners{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:8px 0 30px}
+.pt{background:#fff;border-radius:var(--r4);box-shadow:var(--s2);overflow:hidden}
+.pt img{width:100%;height:130px;object-fit:cover;display:block}
+.pt div{padding:14px 16px}
+.pt b{display:block;font-size:.92rem}
+.pt p{font-size:.8rem;color:var(--n500);line-height:1.5;margin-top:3px}
+.donbox{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:14px;padding:14px 16px;border:1px dashed var(--p300);background:var(--p50);border-radius:var(--r3)}
+.donbox b{font-size:.92rem;color:var(--p800)}
+.donbox p{font-size:.8rem;color:var(--n600);line-height:1.5;margin-top:2px;max-width:46ch}
+.dh{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--p700);margin:16px 0 4px;display:flex;align-items:center;gap:6px}
+.pill--g{background:#FDF2F8;color:#BE185D;border-color:#FBCFE8}
 </style>
 </head>
 <body>
@@ -475,28 +511,28 @@ var PRODUCTS=[
 ];
 
 var REVIEWS={
- p4:[{n:'Chi',c:'#15803D',d:'3 days ago',t:'Bought two packs for a family of four and we got through them in a fortnight. Almost half what the supermarket near us charges.'},
-     {n:'Hưng',c:'#1D4ED8',d:'1 week ago',t:'Cartons intact and the date matched what the site said. Collection at the shop was quick, no waiting around.'}],
- p1:[{n:'Minh',c:'#16A34A',d:'2 days ago',t:'Only a few days left, but I finish a bag within the week anyway. At this price it is a very easy yes.'}],
- p9:[{n:'Linh',c:'#8B5CF6',d:'5 days ago',t:'Seal unbroken, over two months left. I like that it says why it is discounted; reading that settled it for me.'}]
+ p4:[{n:'Chi',img:'https://randomuser.me/api/portraits/women/26.jpg',c:'#15803D',d:'3 days ago',t:'Bought two packs for a family of four and we got through them in a fortnight. Almost half what the supermarket near us charges.'},
+     {n:'Hưng',img:'https://randomuser.me/api/portraits/men/45.jpg',c:'#1D4ED8',d:'1 week ago',t:'Cartons intact and the date matched what the site said. Collection at the shop was quick, no waiting around.'}],
+ p1:[{n:'Minh',img:'https://randomuser.me/api/portraits/men/12.jpg',c:'#16A34A',d:'2 days ago',t:'Only a few days left, but I finish a bag within the week anyway. At this price it is a very easy yes.'}],
+ p9:[{n:'Linh',img:'https://randomuser.me/api/portraits/women/33.jpg',c:'#8B5CF6',d:'5 days ago',t:'Seal unbroken, over two months left. I like that it says why it is discounted; reading that settled it for me.'}]
 };
 
 var FB=[
- {n:'Mr Dung',r:'Owner of two minimarts, Binh Thanh',c:'#15803D',
+ {n:'Mr Dung',img:'https://randomuser.me/api/portraits/men/32.jpg',r:'Owner of two minimarts, Binh Thanh',c:'#15803D',
   q:'Those cases used to sit in the back room until I had to throw them out. Now I list in the morning and someone collects in the afternoon. What I need to know is when I get paid.'},
- {n:'Ms Hanh',r:'Category manager, 60-store chain',c:'#14293D',
+ {n:'Ms Hanh',img:'https://randomuser.me/api/portraits/women/44.jpg',r:'Category manager, 60-store chain',c:'#14293D',
   q:'I do not buy from a presentation. Give me ninety days across five stores, then put your recovery figures next to my own clearance shelf.'},
- {n:'Mr Quang',r:'Trade marketing, FMCG manufacturer',c:'#166534',
+ {n:'Mr Quang',img:'https://randomuser.me/api/portraits/men/68.jpg',r:'Trade marketing, FMCG manufacturer',c:'#166534',
   q:'My problem is not the price, it is the exposure. Show me the floor price is genuinely enforced and then we can talk.'},
- {n:'Ms Mai',r:'Category lead, super-app',c:'#8B5CF6',
+ {n:'Ms Mai',img:'https://randomuser.me/api/portraits/women/65.jpg',r:'Category lead, super-app',c:'#8B5CF6',
   q:'What I cannot assemble myself is several hundred verified small shops. Bring that, and carry the shelf-life responsibility, and I can get it approved.'},
- {n:'Minh',r:'21, student in shared accommodation',c:'#16A34A',
+ {n:'Minh',img:'https://randomuser.me/api/portraits/men/12.jpg',r:'21, student in shared accommodation',c:'#16A34A',
   q:'I am buying noodles and shower gel anyway. Forty per cent off and within walking distance, so why would I not.'},
- {n:'Ms Chi',r:'34, two young children, Go Vap',c:'#15803D',
+ {n:'Ms Chi',img:'https://randomuser.me/api/portraits/women/26.jpg',r:'34, two young children, Go Vap',c:'#15803D',
   q:'What worries me is buying more than we can get through. The line showing the days left, and the cap on quantity, are what make me comfortable ordering.'},
- {n:'Linh',r:'27, office worker in District 1',c:'#8B5CF6',
+ {n:'Linh',img:'https://randomuser.me/api/portraits/women/33.jpg',r:'27, office worker in District 1',c:'#8B5CF6',
   q:'I like that it states why something is discounted. You understand what you are buying, and it is easy to explain to friends.'},
- {n:'Ms Thuy',r:'Programme coordinator, food bank',c:'#0D1E2E',
+ {n:'Ms Thuy',img:'https://randomuser.me/api/portraits/women/12.jpg',r:'Programme coordinator, food bank',c:'#0D1E2E',
   q:'Donations arrive unpredictably, often too close to the date to distribute safely. We need a steady supply and a record we can report against.'}
 ];
 
@@ -523,10 +559,10 @@ function stars(r){
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 var KEY='cirspecs.store.v1';
-var S={day:0,playing:false,mode:'pickup',cat:'All',q:'',sort:'rec',cart:{},fav:{},orders:[],promo:null,pid:null};
+var S={day:0,playing:false,mode:'pickup',cat:'All',q:'',sort:'rec',cart:{},fav:{},orders:[],promo:null,pid:null,don:{},partner:'a',profile:''};
 try{ var raw=localStorage.getItem(KEY); if(raw){ var d=JSON.parse(raw);
-  S.cart=d.cart||{}; S.fav=d.fav||{}; S.orders=d.orders||[]; S.mode=d.mode||'pickup'; } }catch(e){}
-function save(){ try{ localStorage.setItem(KEY,JSON.stringify({cart:S.cart,fav:S.fav,orders:S.orders,mode:S.mode})); }catch(e){} }
+  S.cart=d.cart||{}; S.fav=d.fav||{}; S.orders=d.orders||[]; S.mode=d.mode||'pickup'; S.don=d.don||{}; S.partner=d.partner||'a'; S.profile=d.profile||''; } }catch(e){}
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify({cart:S.cart,fav:S.fav,orders:S.orders,mode:S.mode,don:S.don,partner:S.partner,profile:S.profile})); }catch(e){} }
 
 var tT;
 function toast(msg,icon){
@@ -539,6 +575,158 @@ function toast(msg,icon){
 function byId(id){ return PRODUCTS.filter(function(x){return x.id===id;})[0]; }
 function leftOf(p){ return p.left0-S.day; }
 function eligible(p){ return leftOf(p)>=FLOORS[p.group][S.mode]; }
+
+var PARTNERS=[
+ {id:'a',name:'Hope Pantry',area:'District 8',img:'https://images.unsplash.com/photo-1593113616828-6f22bca04804?w=600&q=80&auto=format&fit=crop',serves:'Weekly food boxes for about 120 households.'},
+ {id:'b',name:'Green Rice Kitchen',area:'Go Vap',img:'https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?w=600&q=80&auto=format&fit=crop',serves:'Free lunches for day labourers and street vendors.'},
+ {id:'c',name:'Little Steps Shelter',area:'Thu Duc',img:'https://images.unsplash.com/photo-1628717341663-0007b0ee2597?w=600&q=80&auto=format&fit=crop',serves:'Daily supplies for 40 children and their carers.'}
+];
+var DON_BASE={units:1248,meals:3120};
+function partnerOf(id){ return PARTNERS.filter(function(x){return x.id===id;})[0]||PARTNERS[0]; }
+function eligibleDon(p){ return leftOf(p)>=FLOORS[p.group].pickup; }
+function donLines(){
+  return Object.keys(S.don).map(function(id){
+    var p=byId(id); if(!p) return null;
+    var left=leftOf(p);
+    return {p:p,qty:S.don[id],left:left,price:priceAt(p,left),ok:left>=FLOORS[p.group].pickup};
+  }).filter(Boolean);
+}
+function donCount(){ var n=0; Object.keys(S.don).forEach(function(k){n+=S.don[k];}); return n; }
+function addDon(id,q){
+  var p=byId(id); if(!p) return;
+  if(!eligibleDon(p)){ toast('Too close to the date to donate'); return; }
+  S.don[id]=Math.min((S.don[id]||0)+q,p.cap);
+  save(); badges(); toast('Added as a donation');
+  if($('drawer').classList.contains('on')) drawCart();
+}
+function donTotal(){
+  var o={sum:0,base:0,units:0,co2:0,bad:0};
+  donLines().forEach(function(l){
+    if(!l.ok){o.bad++;return;}
+    o.sum+=l.price*l.qty; o.base+=l.p.base*l.qty; o.units+=l.qty; o.co2+=CO2[l.p.group]*l.qty;
+  });
+  return o;
+}
+function giftIco(w){ return '<svg width="'+(w||16)+'" height="'+(w||16)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>'; }
+
+/* "Picked for you": a rule-based stand-in for a purchase-behaviour model. */
+var PROFILES={
+ student:{label:'Student',hist:['p3','p8']},
+ family:{label:'Family of four',hist:['p4','p7','p11']},
+ office:{label:'Office worker',hist:['p5','p9']}
+};
+var TOGETHER={p1:['p2','p12'],p2:['p1','p3'],p3:['p2','p1'],p4:['p6','p5'],p5:['p6','p4'],p6:['p5','p4'],
+  p7:['p11','p8'],p8:['p11','p9'],p9:['p10','p8'],p10:['p9'],p11:['p7','p8'],p12:['p1','p2']};
+function realHistory(){
+  var h={};
+  S.orders.forEach(function(o){ o.items.concat(o.don||[]).forEach(function(i){ h[i.id]=Math.max(h[i.id]||0,3); }); });
+  Object.keys(S.cart).forEach(function(id){ h[id]=Math.max(h[id]||0,2); });
+  Object.keys(S.fav).forEach(function(id){ h[id]=Math.max(h[id]||0,1); });
+  return h;
+}
+function activeProfile(){
+  var has=Object.keys(realHistory()).length>0;
+  var pf=S.profile;
+  if(pf==='mine'&&!has) pf='';
+  if(!pf) pf=has?'mine':'student';
+  return pf;
+}
+function shortName(p){ return p.name.split(',')[0]; }
+function recommend(){
+  var pf=activeProfile(), H={};
+  if(pf==='mine') H=realHistory();
+  else PROFILES[pf].hist.forEach(function(id){ H[id]=3; });
+  var out=[];
+  PRODUCTS.forEach(function(p){
+    if(H[p.id]||!eligible(p)) return;
+    var sc=0,best=0,why='';
+    Object.keys(H).forEach(function(hid){
+      var hp=byId(hid), w=H[hid]; if(!hp) return;
+      if((TOGETHER[hid]||[]).indexOf(p.id)>=0){ var v=3*w; sc+=v; if(v>best){best=v;why='Often bought together with '+shortName(hp);} }
+      if(hp.cat===p.cat){ var v2=2*w; sc+=v2; if(v2>best){best=v2;why='You shop '+p.cat.toLowerCase()+' ('+shortName(hp)+')';} }
+      if(hp.brand===p.brand) sc+=1*w;
+      if(hp.group===p.group) sc+=0.7*w;
+    });
+    var left=leftOf(p); sc+=(1-left/(p.left0+10))*0.8;
+    if(!why) why='Close to its date at a big discount';
+    out.push({p:p,sc:sc,why:why});
+  });
+  out.sort(function(a,b){return b.sc-a.sc;});
+  return out.slice(0,4).map(function(r){ r.pct=Math.max(58,Math.min(97,Math.round(52+r.sc*2.1))); return r; });
+}
+function viewForYou(){
+  var pf=activeProfile(), has=Object.keys(realHistory()).length>0, recs=recommend();
+  var tabs=(has?[['mine','My activity']]:[]).concat(Object.keys(PROFILES).map(function(k){return [k,PROFILES[k].label];}));
+  return '<section class="sec sec--w" id="foryou"><div class="wrap">'+
+    '<div class="sh"><h2>Picked for you<span class="ai">AI</span></h2>'+
+    '<p>'+(pf==='mine'
+      ?'Based on what you have bought, carted and saved here, these are the items most likely to suit you next.'
+      :'Nothing bought yet, so this is a sample shopper. Pick a profile to see how the picks change with purchase history.')+'</p></div>'+
+    '<div class="fy__bar"><div class="seg" id="segProf">'+tabs.map(function(t){
+      return '<button data-pf="'+t[0]+'" aria-pressed="'+(t[0]===pf)+'">'+t[1]+'</button>';}).join('')+'</div>'+
+      (pf!=='mine'?'<small>History: '+PROFILES[pf].hist.map(function(id){return esc(shortName(byId(id)));}).join(', ')+'</small>':'')+'</div>'+
+    '<div class="grid">'+recs.map(function(r){
+      return '<div class="rec">'+card(r.p)+'<p class="recwhy"><b>'+r.pct+'% match</b> · '+esc(r.why)+'</p></div>';}).join('')+'</div>'+
+    '<p class="note">Prototype note: the picks come from simple scoring rules (same aisle, bought together, how close to the date), not a trained model. Your history stays in this browser.</p>'+
+  '</div></section>';
+}
+function donTotalAll(){ var u=DON_BASE.units; S.orders.forEach(function(o){u+=(o.donUnits||0);}); return u; }
+function viewDonate(){
+  var u=donTotalAll();
+  var items=PRODUCTS.filter(eligibleDon).sort(function(a,b){return priceAt(a,leftOf(a))-priceAt(b,leftOf(b));}).slice(0,4);
+  return '<section class="sec don" id="donate"><div class="wrap">'+
+    '<div class="don__top"><div class="don__img"><img src="https://images.unsplash.com/photo-1599059813005-11265ba4b4ce?w=900&q=80&auto=format&fit=crop" alt="Volunteers sorting donated food" loading="lazy"><span>Illustrative photo</span></div>'+
+    '<div><div class="sh"><h2>Buy for donation</h2>'+
+    '<p>Not for you? Buy a near-date item at its reduced price and a partner food bank collects it the same day. The shop is paid, the food gets eaten, and you get a receipt for what you gave.</p></div>'+
+    '<div class="stats"><div class="stat"><b>'+u.toLocaleString('en-US')+'</b><span>items donated</span></div>'+
+      '<div class="stat"><b>'+Math.round(u*2.5).toLocaleString('en-US')+'</b><span>meals and supplies</span></div>'+
+      '<div class="stat"><b>'+PARTNERS.length+'</b><span>partner charities</span></div></div>'+
+    '<div class="dsteps"><p><i>1</i><span>Tap the gift button on any item, or choose <b>Buy for donation</b> on its page.</span></p>'+
+      '<p><i>2</i><span>Pick the charity that receives it at checkout. Donations use same-day collection, so even short-dated stock qualifies.</span></p>'+
+      '<p><i>3</i><span>The partner collects, and your order shows a donation receipt.</span></p></div></div></div>'+
+    '<div class="partners">'+PARTNERS.map(function(x){
+      return '<div class="pt"><img src="'+x.img+'" alt="" loading="lazy"><div><b>'+x.name+' · '+x.area+'</b><p>'+x.serves+'</p></div></div>';}).join('')+'</div>'+
+    '<div class="sh"><h2 style="font-size:1.15rem">Good items to donate right now</h2></div>'+
+    '<div class="grid" style="margin-top:14px">'+items.map(card).join('')+'</div>'+
+    '<p class="note">Demo only: the charities and the counters are made-up examples, and no real donation or payment is made.</p>'+
+  '</div></section>';
+}
+function donBox(p){
+  if(!eligibleDon(p)) return '';
+  return '<div class="donbox"><div><b>Buy for donation</b><p>Pay the price above and a partner food bank collects this item today. Nothing is delivered to you.</p></div>'+
+    '<button class="btn btn--o" data-donq="'+p.id+'">'+giftIco(16)+' Donate this</button></div>';
+}
+function donCartHtml(dl){
+  if(!dl.length) return '';
+  return '<p class="dh">'+giftIco(14)+' Donation items</p>'+dl.map(function(l){
+    return '<div class="ln"'+(l.ok?'':' style="opacity:.5"')+'><div class="ln__a">'+thumb(l.p,'44')+'</div>'+
+      '<div class="ln__t"><p class="ln__n">'+esc(l.p.name)+'</p>'+
+      '<p class="ln__m">'+(l.ok?('To '+esc(partnerOf(S.partner).name)+' · '+vnd(l.price)):'Too close to the date to donate')+'</p>'+
+      '<div class="ln__r"><span class="qs"><button data-ddec="'+l.p.id+'">−</button><span>'+l.qty+'</span><button data-dinc="'+l.p.id+'">+</button></span>'+
+      (l.ok?'<span class="ln__p">'+vnd(l.price*l.qty)+'</span>':'<button data-ddel="'+l.p.id+'" style="border:0;background:none;color:var(--n500);font-size:.76rem;text-decoration:underline">Remove</button>')+
+      '</div></div></div>';}).join('');
+}
+function donCheckoutCard(t){
+  if(!t.donUnits) return '';
+  return '<div class="card"><h3>Your donation</h3>'+
+    '<p style="font-size:.85rem;color:var(--n600);line-height:1.55;margin-bottom:12px">'+t.donUnits+' item(s) go to the charity you choose. They are collected today, so nothing is delivered to you.</p>'+
+    '<div class="f"><label for="partner">Donate to</label><select id="partner">'+PARTNERS.map(function(x){
+      return '<option value="'+x.id+'"'+(x.id===S.partner?' selected':'')+'>'+x.name+' · '+x.area+'</option>';}).join('')+'</select></div>'+
+    '<p class="note" style="margin-top:0">'+esc(partnerOf(S.partner).serves)+'</p></div>';
+}
+function donOrderLines(t){
+  return donLines().filter(function(l){return l.ok;}).map(function(l){
+    return '<div class="ln" style="padding:9px 0"><div class="ln__a" style="width:46px;height:46px;flex:0 0 46px">'+thumb(l.p,'36')+'</div>'+
+      '<div class="ln__t"><p class="ln__n" style="font-size:.82rem">'+esc(l.p.name)+'</p>'+
+      '<p class="ln__m"><span class="pill pill--g">Donation</span> x'+l.qty+'</p></div>'+
+      '<span style="font-size:.85rem;font-weight:700;color:var(--dang)">'+vnd(l.price*l.qty)+'</span></div>';}).join('');
+}
+function donItemsHtml(o,fs){
+  var d=o.don||[]; if(!d.length) return '';
+  return '<p class="dh">'+giftIco(14)+' Donated to '+esc(o.partner||'a partner charity')+'</p>'+d.map(function(i){
+    return '<div style="display:flex;justify-content:space-between;gap:10px;font-size:'+fs+';padding:4px 0"><span>'+esc(i.name)+' × '+i.qty+'</span><b>'+vnd(i.price*i.qty)+'</b></div>';}).join('');
+}
+
 function cartLines(){
   return Object.keys(S.cart).map(function(id){
     var p=byId(id); if(!p) return null;
@@ -552,12 +740,13 @@ function totals(){
     if(!l.ok){t.bad++;return;}
     t.sum+=l.price*l.qty; t.base+=l.p.base*l.qty; t.units+=l.qty; t.co2+=CO2[l.p.group]*l.qty;
   });
+  var dn=donTotal(); t.donSum=dn.sum; t.donUnits=dn.units; t.base+=dn.base; t.co2+=dn.co2; t.bad+=dn.bad;
   t.ship=(S.mode==='delivery'&&t.sum>0&&t.sum<FREE_SHIP)?SHIP_FEE:0;
   t.disc=S.promo?Math.round(t.sum*S.promo.pct/100):0;
-  t.total=Math.max(0,t.sum-t.disc+t.ship);
+  t.total=Math.max(0,t.sum-t.disc+t.ship+t.donSum);
   return t;
 }
-function cartCount(){ var n=0; Object.keys(S.cart).forEach(function(k){n+=S.cart[k];}); return n; }
+function cartCount(){ var n=0; Object.keys(S.cart).forEach(function(k){n+=S.cart[k];}); return n+donCount(); }
 function badges(){
   var c=cartCount(), f=Object.keys(S.fav).length;
   $('cartN').textContent=c; $('cartN').hidden=!c;
@@ -643,7 +832,8 @@ function card(p){
       '<span class="pc__cut">−'+cut+'%</span>'+
       '<button class="pc__fav'+(S.fav[p.id]?' on':'')+'" data-fav="'+p.id+'" aria-label="Save this item">'+
       '<svg width="17" height="17" viewBox="0 0 24 24" fill="'+(S.fav[p.id]?'currentColor':'none')+'" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></button>'+
-      '<div class="pc__quick"><button class="btn btn--f btn--sm btn--blk" data-add="'+p.id+'">Add to cart</button></div>'+
+      '<div class="pc__quick" style="display:flex;gap:6px"><button class="btn btn--f btn--sm" style="flex:1" data-add="'+p.id+'">Add to cart</button>'+
+        (eligibleDon(p)?'<button class="btn btn--o btn--sm" data-don="'+p.id+'" title="Buy for donation" aria-label="Buy for donation">'+giftIco(16)+'</button>':'')+'</div>'+
     '</div>'+
     '<div class="pc__b" data-go="'+p.id+'">'+
       '<div><p class="pc__n">'+esc(p.name)+'</p><p class="pc__s">'+p.brand+' · '+p.store+'</p></div>'+
@@ -682,7 +872,7 @@ function viewHome(){
       '<div><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#86EFAC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 7v6c0 4.4 3.4 8.2 8 9 4.6-.8 8-4.6 8-9V7l-8-4Z"/><path d="m9 12 2 2 4-4"/></svg> Seller verified</div>'+
       '<div><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#86EFAC" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Days left shown upfront</div>'+
       '<div><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#86EFAC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg> Refund within 24 hours</div></div>'+
-    '<div class="hcta"><a class="btn btn--w" href="#shop">See what is discounted</a><a class="btn btn--gh" href="#pricing">How the price falls</a></div></div>'+
+    '<div class="hcta"><a class="btn btn--w" href="#shop">See what is discounted</a><a class="btn btn--gh" href="#donate">Buy for donation</a><a class="btn btn--gh" href="#pricing">How the price falls</a></div></div>'+
     '<div class="deal"><div class="deal__t"><span>Live price</span><b>day +'+S.day+'</b></div>'+
       '<div class="deal__b"><div class="deal__a">'+thumb(deal,'72')+'</div>'+
       '<div style="flex:1;min-width:0"><p class="deal__n">'+esc(deal.name)+'</p>'+
@@ -692,6 +882,7 @@ function viewHome(){
       '<p class="deal__f">'+(atFloor(deal,dl)?'It has reached the floor the shop set. The system is not allowed to go lower.':'Press the play button on the dark bar to watch the price fall day by day.')+'</p>'+
     '</div></div></section>'+
 
+  viewForYou()+
   '<section class="sec" id="shop"><div class="wrap">'+
     '<div class="sh"><h2>Available near you</h2>'+
     '<p>Every item states how many days are left and why it is discounted. Most of it is nowhere near spoiling. It was over-ordered, or the packaging changed.</p></div>'+
@@ -710,6 +901,7 @@ function viewHome(){
       :'<div class="empty"><h4>Nothing matched</h4><p>Try a different word, or pick another category.</p></div>')+
   '</div></section>'+
 
+  viewDonate()+
   '<section class="sec sec--w" id="pricing"><div class="wrap">'+
     '<div class="sh"><h2>The price falls by the day, but never past the floor</h2>'+
     '<p>The shop sets two numbers: the lowest price it will accept, and the deepest discount it allows. The system may only move between them.</p></div>'+
@@ -725,10 +917,10 @@ function viewHome(){
 
   '<section class="sec"><div class="wrap">'+
     '<div class="sh"><h2>Feedback from user research</h2>'+
-    '<p>Eight figures standing for the customer groups in the business plan. These are illustrative responses built from the personas, not quotations from real customers.</p></div>'+
+    '<p>Eight figures standing for the customer groups in the business plan. These are illustrative responses built from the personas, not quotations from real customers. Portraits are stock placeholder photos.</p></div>'+
     '<div class="fbgrid">'+FB.map(function(f){
       return '<article class="fb"><p class="fb__q">“'+f.q+'”</p><div class="fb__w">'+
-        '<span class="av" style="background:'+f.c+'">'+f.n.replace(/^(Mr|Ms) /,'')[0]+'</span>'+
+        '<span class="av" style="background:'+f.c+'">'+f.n.replace(/^(Mr|Ms) /,'')[0]+'<img src="'+f.img+'" alt="" loading="lazy" onerror="this.remove()"></span>'+
         '<div><p class="fb__nm">'+f.n+'</p><p class="fb__r">'+f.r+'</p></div></div></article>';}).join('')+
     '</div></div></section></div>';
 }
@@ -759,7 +951,7 @@ function viewProduct(id){
             '<button class="btn btn--f" data-addq="'+p.id+'">Add to cart</button>'+
             '<button class="btn btn--o" data-buy="'+p.id+'">Buy now</button></div>'
           :'<p class="note" style="margin-top:14px">This item does not have enough life left for <b>'+(S.mode==='pickup'?'collection':'delivery')+'</b> at the current point in time. The threshold for this group is '+FLOORS[p.group].pickup+' days when collecting and '+FLOORS[p.group].delivery+' days when delivering.</p>')+
-        '<div class="info">'+
+        donBox(p)+'<div class="info">'+
           '<p class="irow">'+tick+'<span><b>Why it is here:</b> '+p.why+'</span></p>'+
           '<p class="irow">'+tick+'<span>'+p.desc+'</span></p>'+
           '<p class="irow">'+tick+'<span>Up to '+p.cap+' units per customer, so the stock reaches more people.</span></p>'+
@@ -770,7 +962,7 @@ function viewProduct(id){
         '<div class="leg"><span><i style="background:#16A34A"></i>Selling price</span><span><i style="background:#DC2626"></i>Shop floor price</span></div></div>'+
     '</div></div>'+
     (rv.length?'<section style="padding:14px 0 6px"><h3 style="font-size:1.05rem;margin-bottom:12px">What buyers say</h3><div class="revs">'+
-      rv.map(function(r){ return '<div class="rev"><div class="rev__h"><span class="av" style="background:'+r.c+'">'+r.n[0]+'</span>'+
+      rv.map(function(r){ return '<div class="rev"><div class="rev__h"><span class="av" style="background:'+r.c+'">'+r.n[0]+'<img src="'+r.img+'" alt="" loading="lazy" onerror="this.remove()"></span>'+
         '<div><p class="rev__n">'+r.n+'</p><p class="rev__d">'+r.d+'</p></div>'+
         '<span style="margin-left:auto">'+stars(5)+'</span></div><p class="rev__t">'+r.t+'</p></div>';}).join('')+'</div></section>':'')+
     (rel.length?'<section style="padding:26px 0 60px"><h3 style="font-size:1.05rem;margin-bottom:14px">More in this category</h3>'+
@@ -780,13 +972,13 @@ function viewProduct(id){
 
 function viewCheckout(){
   var t=totals();
-  if(!t.units) return '<div class="wrap"><div class="empty"><h4>Nothing eligible in your cart</h4><p>Go back, pick a few items and try again.</p><a class="btn btn--f" href="#/" style="margin-top:14px">Back to home</a></div></div>';
+  if(!t.units&&!t.donUnits) return '<div class="wrap"><div class="empty"><h4>Nothing eligible in your cart</h4><p>Go back, pick a few items and try again.</p><a class="btn btn--f" href="#/" style="margin-top:14px">Back to home</a></div></div>';
   return '<div class="view"><div class="wrap"><div class="co"><div>'+
    '<div class="steps"><div class="done"><i>01</i>Cart</div><div class="on"><i>02</i>Details</div><div><i>03</i>Confirm</div></div>'+
    '<div class="card"><h3>Recipient</h3><div class="fgrid">'+
      '<div class="f"><label for="nm">Full name</label><input id="nm" placeholder="Nguyen Van A"></div>'+
      '<div class="f"><label for="ph">Phone number</label><input id="ph" placeholder="09xx xxx xxx"></div></div></div>'+
-   '<div class="card"><h3>How you get it</h3>'+
+   donCheckoutCard(t)+'<div'+(t.units?'':' hidden')+'>'+'<div class="card"><h3>How you get it</h3>'+
      '<label class="opt'+(S.mode==='pickup'?' on':'')+'" data-m="pickup"><input type="radio" name="m" '+(S.mode==='pickup'?'checked':'')+'>'+
        '<span><b>Collect at the shop — free</b><em>Held for you during the window you pick. This route also reaches the items with the fewest days left.</em></span></label>'+
      '<label class="opt'+(S.mode==='delivery'?' on':'')+'" data-m="delivery"><input type="radio" name="m" '+(S.mode==='delivery'?'checked':'')+'>'+
@@ -796,7 +988,7 @@ function viewCheckout(){
        '<div class="f"><label>Time window</label><select><option>Today 17:00 – 20:00</option><option>Today 12:00 – 14:00</option><option>Tomorrow 09:00 – 12:00</option></select></div></div>'
       :'<div class="f" style="margin-top:12px"><label>Delivery address</label><input placeholder="Street number, street, ward, district"></div>')+
    '</div>'+
-   '<div class="card"><h3>Payment</h3>'+
+   '</div>'+'<div class="card"><h3>Payment</h3>'+
      '<label class="opt on"><input type="radio" name="pay" checked><span><b>MoMo wallet</b><em>Paid as soon as you order.</em></span></label>'+
      '<label class="opt"><input type="radio" name="pay"><span><b>VNPay</b><em>Domestic and international cards.</em></span></label>'+
      '<label class="opt"><input type="radio" name="pay"><span><b>Cash on handover</b><em>Pay at collection, or when the courier arrives.</em></span></label>'+
@@ -807,13 +999,14 @@ function viewCheckout(){
          '<div class="ln__t"><p class="ln__n" style="font-size:.82rem">'+esc(l.p.name)+'</p>'+
          '<p class="ln__m">x'+l.qty+' · '+l.left+' days left</p></div>'+
          '<span style="font-size:.85rem;font-weight:700;color:var(--dang)">'+vnd(l.price*l.qty)+'</span></div>';}).join('')+
-     '<div style="margin-top:12px">'+
+     donOrderLines(t)+'<div style="margin-top:12px">'+
      '<div class="sum"><span>Subtotal</span><b>'+vnd(t.sum)+'</b></div>'+
      (t.disc?'<div class="sum"><span>Code '+S.promo.code+'</span><b style="color:var(--p700)">−'+vnd(t.disc)+'</b></div>':'')+
-     '<div class="sum"><span>'+(S.mode==='pickup'?'Collection':'Delivery')+'</span><b>'+(t.ship?vnd(t.ship):'Free')+'</b></div>'+
+     (t.units?'<div class="sum"><span>'+(S.mode==='pickup'?'Collection':'Delivery')+'</span><b>'+(t.ship?vnd(t.ship):'Free')+'</b></div>':'')+
+     (t.donSum?'<div class="sum"><span>Donated items ('+t.donUnits+')</span><b>'+vnd(t.donSum)+'</b></div>':'')+
      '<div class="sum tot"><span>Total</span><span>'+vnd(t.total)+'</span></div></div>'+
      '<button class="btn btn--f btn--blk" id="place" style="margin-top:14px">Place order</button>'+
-     '<p style="font-size:.76rem;color:var(--n500);text-align:center;margin-top:10px">You are saving '+vnd(t.base-t.sum+t.disc)+' and keeping '+t.units+' items out of the bin.</p>'+
+     '<p style="font-size:.76rem;color:var(--n500);text-align:center;margin-top:10px">You are saving '+vnd(t.base-t.sum-t.donSum+t.disc)+' and keeping '+(t.units+t.donUnits)+' items out of the bin.</p>'+
    '</div></div></div></div></div>';
 }
 
@@ -822,17 +1015,17 @@ function viewSuccess(){
   if(!o) return '<div class="wrap"><div class="empty"><h4>No orders yet</h4><a class="btn btn--f" href="#/" style="margin-top:14px">Back to home</a></div></div>';
   return '<div class="view"><div class="wrap"><div class="okwrap">'+
     '<div class="tickbig"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>'+
-    '<h2>'+(o.mode==='pickup'?'See you at the shop':'Your order is being prepared')+'</h2>'+
-    '<p style="color:var(--n500);margin-top:8px">'+(o.mode==='pickup'?'Show this code to the staff when you collect.':'The courier will call before delivering.')+'</p>'+
+    '<h2>'+(o.own===0?'Thank you for giving':(o.mode==='pickup'?'See you at the shop':'Your order is being prepared'))+'</h2>'+
+    '<p style="color:var(--n500);margin-top:8px">'+(o.own===0?esc(o.partner||'The charity')+' collects your gift today. Keep this code as your donation receipt.':(o.mode==='pickup'?'Show this code to the staff when you collect.':'The courier will call before delivering.'))+'</p>'+
     '<div class="code">'+o.code+'</div>'+
     '<div class="pills" style="justify-content:center">'+
-      '<span class="pill pill--ok">'+o.units+' items rescued</span>'+
+      '<span class="pill pill--ok">'+o.units+' items rescued</span>'+(o.donUnits?'<span class="pill pill--g">'+o.donUnits+' donated</span>':'')+
       '<span class="pill pill--i">≈ '+(o.co2/1000).toFixed(1)+' kg CO₂e</span>'+
       '<span class="pill pill--n">Saved '+vnd(o.saved)+'</span></div>'+
     '<div class="ordcard" style="margin-top:24px">'+
       '<div class="ordcard__h"><b style="font-size:.9rem">Order detail</b><span style="font-size:.8rem;color:var(--n500)">'+new Date(o.at).toLocaleString('en-GB')+'</span></div>'+
       o.items.map(function(i){return '<div style="display:flex;justify-content:space-between;gap:10px;font-size:.86rem;padding:5px 0"><span>'+esc(i.name)+' × '+i.qty+'</span><b>'+vnd(i.price*i.qty)+'</b></div>';}).join('')+
-      '<div class="sum tot" style="font-size:1rem"><span>Total</span><span>'+vnd(o.total)+'</span></div></div>'+
+      donItemsHtml(o,'.86rem')+'<div class="sum tot" style="font-size:1rem"><span>Total</span><span>'+vnd(o.total)+'</span></div></div>'+
     '<div style="display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap">'+
       '<a class="btn btn--f" href="#/">Keep shopping</a><a class="btn btn--o" href="#/orders">View your orders</a></div>'+
   '</div></div></div>';
@@ -848,7 +1041,7 @@ function viewOrders(){
         '<p style="font-size:.78rem;color:var(--n500)">'+new Date(o.at).toLocaleString('en-GB')+' · '+(o.mode==='pickup'?'Collection':'Delivery')+'</p></div>'+
         '<span class="pill pill--ok">'+o.units+' items</span></div>'+
         o.items.map(function(i){return '<div style="display:flex;justify-content:space-between;gap:10px;font-size:.85rem;padding:4px 0"><span>'+esc(i.name)+' × '+i.qty+'</span><b>'+vnd(i.price*i.qty)+'</b></div>';}).join('')+
-        '<div class="sum tot" style="font-size:.98rem"><span>Total</span><span>'+vnd(o.total)+'</span></div></div>';}).join('')
+        donItemsHtml(o,'.85rem')+'<div class="sum tot" style="font-size:.98rem"><span>Total</span><span>'+vnd(o.total)+'</span></div></div>';}).join('')
     :'<div class="empty"><svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="#D4D4D4" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>'+
       '<h4>No orders yet</h4><p>Place one and see how it is kept for you.</p>'+
       '<a class="btn btn--f" href="#/" style="margin-top:14px">Start shopping</a></div>')+
@@ -873,9 +1066,9 @@ $('favBtn').onclick=function(){ location.hash='#/saved'; };
 $('ordBtn').onclick=function(){ location.hash='#/orders'; };
 
 function drawCart(){
-  var lines=cartLines(), t=totals();
+  var lines=cartLines(), t=totals(), dl=donLines();
   $('drT').textContent='Your cart ('+cartCount()+')';
-  if(!lines.length){
+  if(!lines.length&&!dl.length){
     $('drB').innerHTML='<div class="empty"><svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="#D4D4D4" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>'+
       '<h4>Your cart is empty</h4><p>Pick a few things and come back.</p></div>';
     $('drF').innerHTML=''; return;
@@ -892,25 +1085,30 @@ function drawCart(){
         '<div class="ln__r"><span class="qs"><button data-dec="'+l.p.id+'">−</button><span>'+l.qty+'</span><button data-inc="'+l.p.id+'">+</button></span>'+
         (l.ok?'<span class="ln__p">'+vnd(l.price*l.qty)+'</span>'
              :'<button data-del="'+l.p.id+'" style="border:0;background:none;color:var(--n500);font-size:.76rem;text-decoration:underline">Remove</button>')+
-        '</div></div></div>';}).join('');
+        '</div></div></div>';}).join('')+donCartHtml(dl);
   $('drF').innerHTML=
     '<div class="promo"><input id="promo" placeholder="Promo code (try SAVE10)"><button class="btn btn--o btn--sm" id="applyPromo">Apply</button></div>'+
     '<div class="sum"><span>Original price</span><span style="text-decoration:line-through;color:var(--n400)">'+vnd(t.base)+'</span></div>'+
-    '<div class="sum"><span>You save</span><b style="color:var(--p700)">−'+vnd(t.base-t.sum)+'</b></div>'+
+    '<div class="sum"><span>You save</span><b style="color:var(--p700)">−'+vnd(t.base-t.sum-t.donSum)+'</b></div>'+
     (t.disc?'<div class="sum"><span>Code '+S.promo.code+'</span><b style="color:var(--p700)">−'+vnd(t.disc)+'</b></div>':'')+
     (t.ship?'<div class="sum"><span>Delivery</span><b>'+vnd(t.ship)+'</b></div>':'')+
+    (t.donSum?'<div class="sum"><span>Donated items ('+t.donUnits+')</span><b>'+vnd(t.donSum)+'</b></div>':'')+
     '<div class="sum tot"><span>Total</span><span>'+vnd(t.total)+'</span></div>'+
     (t.bad?'<p class="note" style="margin-top:6px">'+t.bad+' item(s) do not have enough life left for the selected route, so they are not counted.</p>':'')+
-    '<button class="btn btn--f btn--blk" id="go" style="margin-top:12px"'+(t.units?'':' disabled')+'>Proceed to checkout</button>';
+    '<button class="btn btn--f btn--blk" id="go" style="margin-top:12px"'+((t.units||t.donUnits)?'':' disabled')+'>Proceed to checkout</button>';
 }
 
 function placeOrder(){
-  var t=totals(); if(!t.units) return;
-  var o={code:'CS-'+Math.random().toString(36).slice(2,6).toUpperCase()+Math.floor(10+Math.random()*89),
-    mode:S.mode,units:t.units,co2:t.co2,saved:t.base-t.sum+t.disc,total:t.total,at:Date.now(),
+  var t=totals(); if(!t.units&&!t.donUnits) return;
+  var pt=partnerOf(S.partner);
+  var o={code:(t.units?'CS-':'DN-')+Math.random().toString(36).slice(2,6).toUpperCase()+Math.floor(10+Math.random()*89),
+    mode:S.mode,own:t.units,units:t.units+t.donUnits,donUnits:t.donUnits,partner:t.donUnits?pt.name:'',co2:t.co2,
+    saved:t.base-t.sum-t.donSum+t.disc,total:t.total,at:Date.now(),
     items:cartLines().filter(function(l){return l.ok;}).map(function(l){
+      return {id:l.p.id,name:l.p.name,qty:l.qty,price:l.price,left:l.left};}),
+    don:donLines().filter(function(l){return l.ok;}).map(function(l){
       return {id:l.p.id,name:l.p.name,qty:l.qty,price:l.price,left:l.left};})};
-  S.orders.unshift(o); S.cart={}; S.promo=null; save(); badges(); closeDrawer();
+  S.orders.unshift(o); S.cart={}; S.don={}; S.promo=null; save(); badges(); closeDrawer();
   location.hash='#/success';
 }
 
@@ -923,7 +1121,12 @@ function html(){
   if(h==='#/saved')    return viewSaved();
   return viewHome();
 }
-function route(){ $('app').innerHTML=html(); window.scrollTo(0,0); wire(); }
+function route(){
+  var h=location.hash||'#/';
+  $('app').innerHTML=html(); wire();
+  var el=/^#(shop|pricing|donate|foryou)$/.test(h)?document.getElementById(h.slice(1)):null;
+  if(el) el.scrollIntoView(); else window.scrollTo(0,0);
+}
 function render(){
   $('dayLbl').textContent='+'+S.day;
   if((location.hash||'#/')==='#/success') return;
@@ -940,6 +1143,10 @@ function wire(){
       save(); badges(); toast(S.fav[f.dataset.fav]?'Saved':'Removed from saved'); render(); return; }
     var a=e.target.closest('[data-add]');
     if(a){ e.preventDefault(); e.stopPropagation(); addCart(a.dataset.add,1); return; }
+    var dn=e.target.closest('[data-don]');
+    if(dn){ e.preventDefault(); e.stopPropagation(); addDon(dn.dataset.don,1); return; }
+    var dq=e.target.closest('[data-donq]');
+    if(dq){ addDon(dq.dataset.donq,+($('qv')?$('qv').textContent:1)); openDrawer(); return; }
     var aq=e.target.closest('[data-addq]'); if(aq){ addCart(aq.dataset.addq,+($('qv')?$('qv').textContent:1)); return; }
     var by=e.target.closest('[data-buy]');
     if(by){ addCart(by.dataset.buy,+($('qv')?$('qv').textContent:1)); location.hash='#/checkout'; return; }
@@ -956,9 +1163,18 @@ function wire(){
     toast(S.mode==='pickup'?'Showing same-day collection stock':'Showing stock available for delivery');
   };
   var so=$('sort'); if(so) so.onchange=function(){ S.sort=this.value; render(); };
+  var sp=$('segProf'); if(sp) sp.onclick=function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    S.profile=b.dataset.pf; save(); render();
+  };
+  var pr=$('partner'); if(pr) pr.onchange=function(){ S.partner=this.value; save(); render(); };
 }
 
 $('drB').onclick=function(e){
+  var di=e.target.closest('[data-dinc]'), dd=e.target.closest('[data-ddec]'), dx=e.target.closest('[data-ddel]');
+  if(di){ var dp=byId(di.dataset.dinc); S.don[di.dataset.dinc]=Math.min((S.don[di.dataset.dinc]||0)+1,dp.cap); save(); badges(); drawCart(); return; }
+  if(dd){ S.don[dd.dataset.ddec]=(S.don[dd.dataset.ddec]||0)-1; if(S.don[dd.dataset.ddec]<=0) delete S.don[dd.dataset.ddec]; save(); badges(); drawCart(); return; }
+  if(dx){ delete S.don[dx.dataset.ddel]; save(); badges(); drawCart(); return; }
   var i=e.target.closest('[data-inc]'), d=e.target.closest('[data-dec]'), x=e.target.closest('[data-del]');
   if(i){ var p=byId(i.dataset.inc); S.cart[i.dataset.inc]=Math.min((S.cart[i.dataset.inc]||0)+1,p.cap); save(); badges(); drawCart(); }
   if(d){ S.cart[d.dataset.dec]=(S.cart[d.dataset.dec]||0)-1;
