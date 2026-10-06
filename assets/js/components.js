@@ -59,7 +59,7 @@ window.CS = window.CS || {};
     var out = '';
     for (var i = 1; i <= 5; i++) {
       out += '<svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true" fill="' +
-        (i <= Math.round(rating) ? '#E8A700' : '#DBD4C8') +
+        (i <= Math.round(rating) ? '#E8A700' : '#CFE0D7') +
         '"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg>';
     }
     return out;
@@ -114,7 +114,7 @@ window.CS = window.CS || {};
     };
 
     return '<svg viewBox="0 0 64 80" width="78%" height="78%" fill="none" aria-hidden="true">' + defs +
-      '<ellipse cx="32" cy="72" rx="17" ry="3.4" fill="#131210" opacity=".08"/>' +
+      '<ellipse cx="32" cy="72" rx="17" ry="3.4" fill="#0F1B17" opacity=".08"/>' +
       (SHAPES[kind] || SHAPES.box) + '</svg>';
   }
 
@@ -134,6 +134,17 @@ window.CS = window.CS || {};
     var left = store.daysLeft(p);
     var threshold = CS.FLOORS[p.group][S.mode];
 
+    if (!store.inStock(p)) {
+      return '<article class="card is-off">' +
+        '<div class="card__shot">' + packshot(p) + '</div>' +
+        '<div class="card__body">' +
+          '<p class="card__name">' + esc(p.name) + '</p>' +
+          '<p class="card__sub">' + esc(p.brand) + '</p>' +
+          '<span class="pill">Sold out</span>' +
+          '<p class="card__off">The seller has no stock left. It returns if the shop restocks.</p>' +
+        '</div></article>';
+    }
+
     if (left < threshold) {
       var collectable = left >= CS.FLOORS[p.group].pickup && S.mode === 'delivery';
       return '<article class="card is-off">' +
@@ -152,6 +163,7 @@ window.CS = window.CS || {};
     var cut = P.discountPct(p, left);
     var fr = P.freshness(left, p.group, S.mode);
     var drop = P.nextDrop(left);
+    if (drop !== null && P.priceAt(p, left - drop) >= price) drop = null; /* the floor swallows it */
     var saved = !!S.fav[p.id];
 
     return '<article class="card">' +
@@ -173,14 +185,30 @@ window.CS = window.CS || {};
         '<p class="card__price"><b>' + vnd(price) + '</b><s>' + vnd(p.base) + '</s></p>' +
         '<p class="card__name">' + esc(p.name) + '</p>' +
         '<p class="card__sub">' + esc(p.brand) + ' &middot; ' + esc(p.store) + '</p>' +
+        (p.stock !== undefined && p.stock <= 8 ? '<p class="card__stock">Only ' + p.stock + ' left</p>' : '') +
         '<p class="card__rate">' + stars(p.rate) + '<b>' + p.rate.toFixed(1) + '</b><span>(' + p.revs + ')</span></p>' +
+        sparkline(p) +
         '<div class="meter"><i style="width:' + P.lifeRatio(p, left) + '%;background:' + fr.colour + '"></i></div>' +
         '<p class="card__life"><span style="color:' + fr.colour + ';font-weight:700">' + left + ' days left</span>' +
-          '<span style="color:var(--ink-3)">' + (drop ? 'drops again in ' + drop + 'd' : 'lowest step') + '</span></p>' +
+          '<span style="color:var(--ink-3)">' + (drop ? 'next: ' + vnd(P.priceAt(p, left - drop)).replace(' \u20ab', '') + ' in ' + drop + 'd' : 'lowest step') + '</span></p>' +
       '</div></article>';
   }
 
   /* --- charts -------------------------------------------------------------- */
+
+  /* A tiny price-against-time line for the product card. The dot is today. */
+  function sparkline(p) {
+    var W = 300, H = 28, span = Math.max(1, p.left0 - CS.FLOORS[p.group].pickup), pts = [], i;
+    for (i = 0; i <= span; i++) pts.push(P.priceAt(p, p.left0 - i));
+    var hi = p.base, lo = Math.min.apply(null, pts) * 0.96;
+    var X = function (d) { return 3 + d / span * (W - 6); };
+    var Y = function (v) { return 3 + (1 - (v - lo) / Math.max(1, hi - lo)) * (H - 6); };
+    var line = pts.map(function (v, n) { return (n ? 'L' : 'M') + X(n).toFixed(1) + ' ' + Y(v).toFixed(1); }).join(' ');
+    var now = Math.min(span, Math.max(0, S.day));
+    return '<svg class="spark" viewBox="0 0 ' + W + ' ' + H + '" width="100%" aria-hidden="true">' +
+      '<path d="' + line + '" fill="none" stroke="#0B6B42" stroke-width="1.8" stroke-linejoin="round"/>' +
+      '<circle cx="' + X(now) + '" cy="' + Y(pts[now]) + '" r="3" fill="#0B6B42" stroke="#fff" stroke-width="1.5"/></svg>';
+  }
 
   /* The price of one product against the days it has been on the shelf. */
   function priceChart(p) {
@@ -202,24 +230,24 @@ window.CS = window.CS || {};
     var nowValue = P.priceAt(p, p.left0 - now);
 
     var gridlines = [lo, (lo + hi) / 2, hi].map(function (v) {
-      return '<text x="' + (pad.l - 9) + '" y="' + (Y(v) + 3.5) + '" text-anchor="end" font-size="10" fill="#7E786F">' +
+      return '<text x="' + (pad.l - 9) + '" y="' + (Y(v) + 3.5) + '" text-anchor="end" font-size="10" fill="#72837A">' +
         Math.round(v / 1000) + 'k</text>' +
-        '<line x1="' + pad.l + '" y1="' + Y(v) + '" x2="' + (W - pad.r) + '" y2="' + Y(v) + '" stroke="#EDE8DF"/>';
+        '<line x1="' + pad.l + '" y1="' + Y(v) + '" x2="' + (W - pad.r) + '" y2="' + Y(v) + '" stroke="#E6F0EB"/>';
     }).join('');
 
     return '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" ' +
       'aria-label="Selling price falling from ' + vnd(p.base) + ' towards the floor of ' + vnd(floor) + '">' +
       '<defs><linearGradient id="fade' + p.id + '" x1="0" y1="0" x2="0" y2="1">' +
-        '<stop offset="0" stop-color="#0C5C3D" stop-opacity=".22"/><stop offset="1" stop-color="#0C5C3D" stop-opacity="0"/>' +
+        '<stop offset="0" stop-color="#0B6B42" stop-opacity=".22"/><stop offset="1" stop-color="#0B6B42" stop-opacity="0"/>' +
       '</linearGradient></defs>' + gridlines +
       '<path d="' + area + '" fill="url(#fade' + p.id + ')"/>' +
-      '<path d="' + line + '" fill="none" stroke="#0C5C3D" stroke-width="2.6" stroke-linejoin="round"/>' +
-      '<line x1="' + pad.l + '" y1="' + Y(floor) + '" x2="' + (W - pad.r) + '" y2="' + Y(floor) + '" stroke="#C8102E" stroke-width="1.6" stroke-dasharray="5 4"/>' +
-      '<text x="' + (W - pad.r) + '" y="' + (Y(floor) - 6) + '" text-anchor="end" font-size="10" fill="#C8102E">floor ' + vnd(floor) + '</text>' +
-      '<line x1="' + X(now) + '" y1="' + pad.t + '" x2="' + X(now) + '" y2="' + (H - pad.b) + '" stroke="#131210" stroke-dasharray="3 3" opacity=".4"/>' +
-      '<circle cx="' + X(now) + '" cy="' + Y(nowValue) + '" r="6" fill="#0C5C3D" stroke="#fff" stroke-width="2.5"/>' +
-      '<text x="' + pad.l + '" y="' + (H - 8) + '" font-size="10" fill="#7E786F">listed</text>' +
-      '<text x="' + (W - pad.r) + '" y="' + (H - 8) + '" text-anchor="end" font-size="10" fill="#7E786F">+' + span + 'd &middot; delisted</text>' +
+      '<path d="' + line + '" fill="none" stroke="#0B6B42" stroke-width="2.6" stroke-linejoin="round"/>' +
+      '<line x1="' + pad.l + '" y1="' + Y(floor) + '" x2="' + (W - pad.r) + '" y2="' + Y(floor) + '" stroke="#CC3A47" stroke-width="1.6" stroke-dasharray="5 4"/>' +
+      '<text x="' + (W - pad.r) + '" y="' + (Y(floor) - 6) + '" text-anchor="end" font-size="10" fill="#CC3A47">floor ' + vnd(floor) + '</text>' +
+      '<line x1="' + X(now) + '" y1="' + pad.t + '" x2="' + X(now) + '" y2="' + (H - pad.b) + '" stroke="#0F1B17" stroke-dasharray="3 3" opacity=".4"/>' +
+      '<circle cx="' + X(now) + '" cy="' + Y(nowValue) + '" r="6" fill="#0B6B42" stroke="#fff" stroke-width="2.5"/>' +
+      '<text x="' + pad.l + '" y="' + (H - 8) + '" font-size="10" fill="#72837A">listed</text>' +
+      '<text x="' + (W - pad.r) + '" y="' + (H - 8) + '" text-anchor="end" font-size="10" fill="#72837A">+' + span + 'd &middot; delisted</text>' +
       '</svg>';
   }
 
@@ -236,18 +264,18 @@ window.CS = window.CS || {};
     var line = pts.map(function (x, i) { return (i ? 'L' : 'M') + X(x.d).toFixed(1) + ' ' + Y(x.v).toFixed(1); }).join(' ');
 
     var marks = P.STEPS.map(function (d2) {
-      return '<line x1="' + X(d2) + '" y1="' + pad.t + '" x2="' + X(d2) + '" y2="' + (H - pad.b) + '" stroke="#EDE8DF"/>' +
-        '<text x="' + X(d2) + '" y="' + (H - 9) + '" text-anchor="middle" font-size="10" fill="#7E786F">' + d2 + 'd</text>';
+      return '<line x1="' + X(d2) + '" y1="' + pad.t + '" x2="' + X(d2) + '" y2="' + (H - pad.b) + '" stroke="#E6F0EB"/>' +
+        '<text x="' + X(d2) + '" y="' + (H - 9) + '" text-anchor="middle" font-size="10" fill="#72837A">' + d2 + 'd</text>';
     }).join('');
 
     return '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" ' +
       'aria-label="Discount ladder: the price steps down at 90, 45, 30, 15 and 7 days left, then holds at the floor">' +
       marks +
-      '<path d="' + line + '" fill="none" stroke="#0C5C3D" stroke-width="2.8" stroke-linejoin="round"/>' +
+      '<path d="' + line + '" fill="none" stroke="#0B6B42" stroke-width="2.8" stroke-linejoin="round"/>' +
       '<line x1="' + pad.l + '" y1="' + Y(base * floorPct / 100) + '" x2="' + (W - pad.r) + '" y2="' + Y(base * floorPct / 100) +
-        '" stroke="#C8102E" stroke-width="1.6" stroke-dasharray="5 4"/>' +
-      '<text x="' + (pad.l + 5) + '" y="' + (Y(base * floorPct / 100) - 6) + '" font-size="10" fill="#C8102E">shop floor price</text>' +
-      '<text x="' + pad.l + '" y="' + (pad.t - 4) + '" font-size="10" fill="#7E786F">shelf price</text>' +
+        '" stroke="#CC3A47" stroke-width="1.6" stroke-dasharray="5 4"/>' +
+      '<text x="' + (pad.l + 5) + '" y="' + (Y(base * floorPct / 100) - 6) + '" font-size="10" fill="#CC3A47">shop floor price</text>' +
+      '<text x="' + pad.l + '" y="' + (pad.t - 4) + '" font-size="10" fill="#72837A">shelf price</text>' +
       '</svg>';
   }
 
@@ -303,7 +331,7 @@ window.CS = window.CS || {};
     esc: esc, vnd: vnd, num: num,
     icon: icon, play: play, stars: stars, PATHS: PATHS,
     packshot: packshot, drawnPack: drawnPack,
-    card: card, priceChart: priceChart, ladderChart: ladderChart,
+    sparkline: sparkline, card: card, priceChart: priceChart, ladderChart: ladderChart,
     avatar: avatar, quoteCard: quoteCard, lineItem: lineItem, orderLine: orderLine
   };
 

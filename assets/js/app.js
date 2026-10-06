@@ -21,7 +21,7 @@ window.CS = window.CS || {};
     var el = $('toast');
     var mark = tone === 'bad'
       ? icon('close', 16, '#FF9A94')
-      : icon('check', 16, '#FFD400');
+      : icon('check', 16, '#F3D567');
     el.innerHTML = mark + '<span>' + message + '</span>';
     el.classList.add('is-on');
     clearTimeout(toastTimer);
@@ -42,7 +42,10 @@ window.CS = window.CS || {};
   }
 
   function paintRange(el) {
-    el.style.setProperty('--pct', ((el.value - el.min) / (el.max - el.min)) * 100 + '%');
+    var pct = ((el.value - el.min) / (el.max - el.min)) * 100 + '%';
+  el.style.setProperty('--pct', pct);
+  var bar = el.closest && el.closest('.clock');
+  if (bar) bar.style.setProperty('--pct', pct);
   }
 
   /* ============================================================ home view */
@@ -69,9 +72,9 @@ window.CS = window.CS || {};
             '<a class="btn btn--onDark" href="#pricing">How the price falls</a>' +
           '</div>' +
           '<ul class="heroTrust">' +
-            '<li>' + icon('shield', 17, '#FFD400') + ' Seller verified</li>' +
-            '<li>' + icon('clock', 17, '#FFD400') + ' Days left shown upfront</li>' +
-            '<li>' + icon('refresh', 17, '#FFD400') + ' Refund within 24 hours</li>' +
+            '<li>' + icon('shield', 17, '#F3D567') + ' Seller verified</li>' +
+            '<li>' + icon('clock', 17, '#F3D567') + ' Days left shown upfront</li>' +
+            '<li>' + icon('refresh', 17, '#F3D567') + ' Refund within 24 hours</li>' +
           '</ul>' +
         '</div>' +
       '</section>' +
@@ -95,10 +98,10 @@ window.CS = window.CS || {};
               '<p class="livedeal__price"><b>' + vnd(price) + '</b><s>' + vnd(deal.base) + '</s></p>' +
             '</div>' +
           '</div>' +
-          '<div class="meter meter--onDark"><i style="width:' + P.lifeRatio(deal, left) + '%;background:#FFD400"></i></div>' +
+          '<div class="meter meter--onDark"><i style="width:' + P.lifeRatio(deal, left) + '%;background:#F3D567"></i></div>' +
           '<p class="livedeal__foot">' + (P.atFloor(deal, left)
             ? 'It has reached the floor the shop set. The system is not allowed to go lower.'
-            : 'Press play on the blue bar above to watch the price fall day by day.') + '</p>' +
+            : 'Press play on the time bar above to watch the price fall day by day.') + '</p>' +
         '</div>' +
       '</section>' +
 
@@ -149,8 +152,9 @@ window.CS = window.CS || {};
         '<h2>Available near you</h2>' +
         '<p>Every item states how many days are left and why it is discounted. Most of it is nowhere near spoiling: it was over-ordered, or the packaging changed.</p>' +
       '</div>' +
+      CS.views.mapBlock() +
       '<div class="tools">' +
-        '<div class="seg" id="segMode">' +
+      '<div class="seg" id="segMode">' +
           '<button data-mode="pickup" aria-pressed="' + (S.mode === 'pickup') + '">Same-day collection</button>' +
           '<button data-mode="delivery" aria-pressed="' + (S.mode === 'delivery') + '">Delivery</button>' +
         '</div>' +
@@ -167,7 +171,7 @@ window.CS = window.CS || {};
       '</div>' +
       (list.length
         ? '<div class="grid">' + list.map(card).join('') + '</div>'
-        : '<div class="empty">' + icon('search', 44, '#DBD4C8') +
+        : '<div class="empty">' + icon('search', 44, '#CFE0D7') +
           '<h3>Nothing matched</h3><p>Try a different word, or pick another category from the row above.</p></div>') +
     '</div></section>';
   }
@@ -204,8 +208,8 @@ window.CS = window.CS || {};
           '<h3 style="font-size:var(--t-base);margin-bottom:10px">The markdown ladder</h3>' +
           ui.ladderChart() +
           '<div class="legend">' +
-            '<span><i style="background:#0C5C3D"></i>Selling price by days left</span>' +
-            '<span><i style="background:#C8102E"></i>Floor price</span>' +
+            '<span><i style="background:#0B6B42"></i>Selling price by days left</span>' +
+            '<span><i style="background:#CC3A47"></i>Floor price</span>' +
           '</div>' +
         '</div>' +
         '<div class="ladder">' +
@@ -253,9 +257,9 @@ window.CS = window.CS || {};
               '<li><i><span>3</span></i><span>The partner collects, and your order carries a donation receipt.</span></li>' +
             '</ul>' +
             '<div class="figures" style="margin-bottom:0">' +
-              '<div class="figure" style="background:rgba(255,255,255,.12)"><b style="color:#FFD400">' + ui.num(donated) + '</b><span style="color:rgba(255,255,255,.75)">items donated</span></div>' +
-              '<div class="figure" style="background:rgba(255,255,255,.12)"><b style="color:#FFD400">' + ui.num(donated * 2.5) + '</b><span style="color:rgba(255,255,255,.75)">meals and supplies</span></div>' +
-              '<div class="figure" style="background:rgba(255,255,255,.12)"><b style="color:#FFD400">' + CS.PARTNERS.length + '</b><span style="color:rgba(255,255,255,.75)">partner charities</span></div>' +
+              '<div class="figure" style="background:rgba(255,255,255,.12)"><b style="color:#F3D567">' + ui.num(donated) + '</b><span style="color:rgba(255,255,255,.75)">items donated</span></div>' +
+              '<div class="figure" style="background:rgba(255,255,255,.12)"><b style="color:#F3D567">' + ui.num(donated * 2.5) + '</b><span style="color:rgba(255,255,255,.75)">meals and supplies</span></div>' +
+              '<div class="figure" style="background:rgba(255,255,255,.12)"><b style="color:#F3D567">' + CS.PARTNERS.length + '</b><span style="color:rgba(255,255,255,.75)">partner charities</span></div>' +
             '</div>' +
           '</div></div>' +
         '</section>' +
@@ -290,7 +294,7 @@ window.CS = window.CS || {};
   }
 
   function viewHome() {
-    return '<div class="view">' + heroMosaic() + recommendationBand() + shopBand() +
+    return '<div class="view">' + heroMosaic() + CS.views.impactBand() + CS.views.alertsBand() + recommendationBand() + shopBand() +
       pricingBand() + donateBand() + voicesBand() + '</div>';
   }
 
@@ -306,7 +310,7 @@ window.CS = window.CS || {};
     var price = P.priceAt(p, left);
     var cut = P.discountPct(p, left);
     var fr = P.freshness(left, p.group, S.mode);
-    var tick = icon('check', 18, '#0C5C3D');
+    var tick = icon('check', 18, '#0B6B42');
     var related = CS.PRODUCTS.filter(function (x) {
       return x.cat === p.cat && x.id !== p.id && store.sellable(x);
     }).slice(0, 4);
@@ -359,8 +363,9 @@ window.CS = window.CS || {};
                 '<button class="btn btn--quiet btn--sm" data-donateqty="' + p.id + '">' + icon('gift', 16) + ' Donate this</button></div>'
               : '') +
 
-            '<ul class="facts">' +
-              '<li>' + tick + '<span><b>Why it is here:</b> ' + esc(p.why) + '</span></li>' +
+            CS.views.advisor(p) +
+      '<ul class="facts">' +
+      '<li>' + tick + '<span><b>Why it is here:</b> ' + esc(p.why) + '</span></li>' +
               '<li>' + tick + '<span>' + esc(p.desc) + '</span></li>' +
               '<li>' + tick + '<span>Up to ' + p.cap + ' units per customer, so the stock reaches more people.</span></li>' +
               '<li>' + tick + '<span>Not happy with it? Refund within 24 hours of collection.</span></li>' +
@@ -371,8 +376,8 @@ window.CS = window.CS || {};
             '<h3>How this price comes down</h3>' +
             '<p class="note" style="margin-bottom:12px">The green line is the selling price against days remaining. The red line is the floor the shop set, where it stops. The dot is where you are now; drag the time bar to move it.</p>' +
             ui.priceChart(p) +
-            '<div class="legend"><span><i style="background:#0C5C3D"></i>Selling price</span>' +
-            '<span><i style="background:#C8102E"></i>Shop floor price</span></div>' +
+            '<div class="legend"><span><i style="background:#0B6B42"></i>Selling price</span>' +
+            '<span><i style="background:#CC3A47"></i>Shop floor price</span></div>' +
           '</div>' +
         '</div>' +
       '</div>' +
@@ -401,7 +406,7 @@ window.CS = window.CS || {};
   function viewCheckout() {
     var t = store.totals();
     if (!t.units && !t.donUnits) {
-      return '<div class="shell"><div class="empty">' + icon('bag', 44, '#DBD4C8') +
+      return '<div class="shell"><div class="empty">' + icon('bag', 44, '#CFE0D7') +
         '<h3>Nothing eligible in your basket</h3><p>Go back, pick a few items and try again.</p>' +
         '<a class="btn btn--primary" href="#/">Back to the shop</a></div></div>';
     }
@@ -511,7 +516,7 @@ window.CS = window.CS || {};
       : (o.mode === 'pickup' ? 'Show this code to the staff when you collect.' : 'The courier will call before delivering.');
 
     return '<div class="view"><div class="shell"><div class="receipt">' +
-      '<div class="receipt__tick">' + icon('check', 42, '#0C5C3D') + '</div>' +
+      '<div class="receipt__tick">' + icon('check', 42, '#0B6B42') + '</div>' +
       '<h2 class="headline" style="font-size:var(--t-xl)">' + heading + '</h2>' +
       '<p class="lede" style="margin:10px auto 0">' + blurb + '</p>' +
       '<p class="receipt__code">' + o.code + '</p>' +
@@ -559,7 +564,7 @@ window.CS = window.CS || {};
                 : '') +
               '<div class="sumrow sumrow--total"><span>Total</span><span>' + vnd(o.total) + '</span></div></div>';
           }).join('')
-        : '<div class="empty">' + icon('receipt', 44, '#DBD4C8') +
+        : '<div class="empty">' + icon('receipt', 44, '#CFE0D7') +
           '<h3>No orders yet</h3><p>Place one and see how it is kept for you.</p>' +
           '<a class="btn btn--primary" href="#/">Start shopping</a></div>') +
     '</div></div>';
@@ -573,9 +578,9 @@ window.CS = window.CS || {};
       '<h2 class="headline" style="font-size:var(--t-xl);margin:6px 0 8px">Saved items</h2>' +
       '<p class="note" style="margin-bottom:24px">Prices here move with the clock, exactly as they do on the shop page.</p>' +
       (list.length
-        ? '<div class="grid">' + list.map(card).join('') + '</div>'
-        : '<div class="empty">' +
-          '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#DBD4C8" stroke-width="1.5" aria-hidden="true">' + ui.PATHS.heart + '</svg>' +
+        ? '<div class="grid">' + list.map(function (p) { return '<div class="rec">' + card(p) + CS.views.savedNote(p) + '</div>'; }).join('') + '</div>'
+      : '<div class="empty">' +
+      '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#CFE0D7" stroke-width="1.5" aria-hidden="true">' + ui.PATHS.heart + '</svg>' +
           '<h3>Nothing saved yet</h3><p>Tap the heart on any item to keep it here.</p>' +
           '<a class="btn btn--primary" href="#/">See what is reduced</a></div>') +
     '</div></div>';
@@ -605,7 +610,7 @@ window.CS = window.CS || {};
     $('drawerTitle').textContent = 'Your basket (' + store.basketCount() + ')';
 
     if (!lines.length && !dons.length) {
-      $('drawerBody').innerHTML = '<div class="empty">' + icon('bag', 44, '#DBD4C8') +
+      $('drawerBody').innerHTML = '<div class="empty">' + icon('bag', 44, '#CFE0D7') +
         '<h3>Your basket is empty</h3><p>Pick a few things and come back.</p></div>';
       $('drawerFoot').innerHTML = '';
       return;
@@ -648,7 +653,9 @@ window.CS = window.CS || {};
     if (hash === '#/checkout') return viewCheckout();
     if (hash === '#/success')  return viewSuccess();
     if (hash === '#/orders')   return viewOrders();
-    if (hash === '#/saved')    return viewSaved();
+    if (hash === '#/saved') return viewSaved();
+    if (hash === '#/seller') return CS.views.sellerView();
+    if (hash === '#/db') return CS.views.dbView();
     return viewHome();
   }
 
@@ -656,7 +663,8 @@ window.CS = window.CS || {};
 
   function render() {
     $('dayLabel').textContent = '+' + S.day;
-    if ((location.hash || '#/') === '#/success') return;   /* never redraw a receipt */
+    var here = location.hash || '#/';
+    if (here === '#/success' || here === '#/seller' || here === '#/db') return; /* receipt and forms keep what you typed */
     $('app').innerHTML = viewFor(location.hash || '#/');
     wireView();
     if (drawerOpen()) drawDrawer();
@@ -668,9 +676,16 @@ window.CS = window.CS || {};
     $('app').innerHTML = viewFor(hash);
     wireView();
     markTabs();
+    if (hash === '#/seller') CS.views.sellerPreview();
     var anchor = ANCHORS.test(hash) ? document.getElementById(hash.slice(1)) : null;
     if (anchor) anchor.scrollIntoView();
     else window.scrollTo(0, 0);
+  }
+
+  function refreshView() {
+    $('app').innerHTML = viewFor(location.hash || '#/');
+    wireView();
+    markTabs();
   }
 
   function markTabs() {
@@ -869,6 +884,7 @@ window.CS = window.CS || {};
     measureChrome();
     window.addEventListener('resize', measureChrome);
     wireChrome();
+    CS.views.init({ render: render, refresh: refreshView, toast: toast });
     paintRange($('clock'));
     badges();
     route();

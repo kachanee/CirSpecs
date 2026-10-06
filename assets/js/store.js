@@ -21,7 +21,8 @@ window.CS = window.CS || {};
     day: 0, playing: false,
     mode: 'pickup', cat: 'All', query: '', sort: 'rec',
     cart: {}, don: {}, fav: {}, orders: [],
-    promo: null, partner: 'a', profile: ''
+    promo: null, partner: 'a', profile: '',
+    maxKm: 5, store: ''
   };
 
   try {
@@ -55,8 +56,11 @@ window.CS = window.CS || {};
     return null;
   }
   function daysLeft(p)  { return p.left0 - state.day; }
-  function sellable(p)  { return P.sellable(p, daysLeft(p), state.mode); }
-  function donatable(p) { return P.donatable(p, daysLeft(p)); }
+  /* Stock comes from the demo database (db.js); a product with no stock field is unlimited. */
+  function inStock(p)   { return p.stock === undefined || p.stock > 0; }
+  function limit(p)     { return p.stock === undefined ? p.cap : Math.min(p.cap, p.stock); }
+  function sellable(p)  { return inStock(p) && P.sellable(p, daysLeft(p), state.mode); }
+  function donatable(p) { return inStock(p) && P.donatable(p, daysLeft(p)); }
   function partnerOf(id) {
     for (var i = 0; i < CS.PARTNERS.length; i++) {
       if (CS.PARTNERS[i].id === id) return CS.PARTNERS[i];
@@ -74,7 +78,7 @@ window.CS = window.CS || {};
       return {
         p: p, qty: bag[id], left: left,
         price: P.priceAt(p, left),
-        ok: P.sellable(p, left, routeMode)
+        ok: inStock(p) && P.sellable(p, left, routeMode)
       };
     }).filter(Boolean);
   }
@@ -119,7 +123,7 @@ window.CS = window.CS || {};
   function addToCart(id, qty) {
     var p = byId(id);
     if (!p) return false;
-    state.cart[id] = Math.min((state.cart[id] || 0) + qty, p.cap);
+    state.cart[id] = Math.min((state.cart[id] || 0) + qty, limit(p));
     save();
     return true;
   }
@@ -127,7 +131,7 @@ window.CS = window.CS || {};
   function addToDonation(id, qty) {
     var p = byId(id);
     if (!p || !donatable(p)) return false;
-    state.don[id] = Math.min((state.don[id] || 0) + qty, p.cap);
+    state.don[id] = Math.min((state.don[id] || 0) + qty, limit(p));
     save();
     return true;
   }
@@ -137,7 +141,7 @@ window.CS = window.CS || {};
     if (!p) return;
     var next = (bag[id] || 0) + delta;
     if (next <= 0) delete bag[id];
-    else bag[id] = Math.min(next, p.cap);
+    else bag[id] = Math.min(next, limit(p));
     save();
   }
   function drop(bag, id) { delete bag[id]; save(); }
@@ -181,6 +185,7 @@ window.CS = window.CS || {};
     };
 
     state.orders.unshift(order);
+    if (CS.db) CS.db.recordOrder(order);
     state.cart = {}; state.don = {}; state.promo = null;
     save();
     return order;
@@ -206,6 +211,8 @@ window.CS = window.CS || {};
     var q = state.query.trim().toLowerCase();
     return CS.PRODUCTS.filter(function (p) {
       if (state.cat !== 'All' && p.cat !== state.cat) return false;
+      if (p.km > state.maxKm) return false;
+      if (state.store && p.store !== state.store) return false;
       if (q && (p.name + ' ' + p.brand + ' ' + p.cat + ' ' + p.store).toLowerCase().indexOf(q) < 0) return false;
       return true;
     }).sort(SORTS[state.sort] || SORTS.rec);
@@ -286,6 +293,7 @@ window.CS = window.CS || {};
   CS.store = {
     save: save,
     byId: byId, daysLeft: daysLeft, sellable: sellable, donatable: donatable,
+    inStock: inStock, limit: limit,
     partnerOf: partnerOf,
     cartLines: cartLines, donLines: donLines, totals: totals,
     count: count, basketCount: basketCount,
