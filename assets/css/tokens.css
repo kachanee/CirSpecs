@@ -9,40 +9,40 @@
 
   /* --- surfaces ---------------------------------------------------------- */
   --paper:#FFFFFF;
-  --sand:#F3EFE8;          /* page background, warm off-white */
-  --sand-2:#E9E3D8;        /* image wells, inset panels */
-  --line:#DBD4C8;          /* hairlines on sand */
-  --line-2:#EDE8DF;        /* hairlines on paper */
+  --sand:#F2F8F5;          /* page background, warm off-white */
+  --sand-2:#E3EFE9;        /* image wells, inset panels */
+  --line:#CFE0D7;          /* hairlines on sand */
+  --line-2:#E6F0EB;        /* hairlines on paper */
 
   /* --- ink --------------------------------------------------------------- */
-  --ink:#131210;           /* headings, primary text */
-  --ink-2:#4E4A44;         /* body copy */
-  --ink-3:#7E786F;         /* captions, meta */
+  --ink:#0F1B17;           /* headings, primary text */
+  --ink-2:#42524A;         /* body copy */
+  --ink-3:#72837A;         /* captions, meta */
   --ink-on-dark:#FFFFFF;
   --ink-on-dark-2:rgba(255,255,255,.74);
 
   /* --- brand ------------------------------------------------------------- */
-  --brand:#0C5C3D;         /* CirSpecs green: primary actions, logo */
-  --brand-dark:#07402A;
-  --brand-tint:#E3EFE8;
-  --brand-line:#BCD8C8;
+  --brand:#0F8050;         /* CirSpecs green: primary actions, logo */
+  --brand-dark:#0A5F3B;
+  --brand-tint:#E2F4EA;
+  --brand-line:#B7E0C8;
 
   /* --- editorial blocks -------------------------------------------------- */
-  --sun:#FFD400;           /* the yellow panel */
-  --brick:#9E2B25;
-  --clay:#DE5B1F;
-  --navy:#153A5C;
-  --plum:#5A3769;
-  --cream:#F6E7C8;
+  --sun:#F3D567;           /* the yellow panel */
+  --brick:#1D63A8;
+  --clay:#1F8F5F;
+  --navy:#0E4A7B;
+  --plum:#2F6FB5;
+  --cream:#E2F1FA;
 
   /* --- semantic ---------------------------------------------------------- */
-  --price:#C8102E;         /* the reduced price, always this red */
-  --warn:#A75E12;
-  --warn-bg:#FDF3E2;
-  --danger:#B3261E;
-  --danger-bg:#FBECEA;
-  --ai:#5A3769;
-  --ai-bg:#F2ECF6;
+  --price:#CC3A47;         /* the reduced price, always this red */
+  --warn:#A8700A;
+  --warn-bg:#FFF5D6;
+  --danger:#BC4040;
+  --danger-bg:#FCEEEE;
+  --ai:#2F6FB5;
+  --ai-bg:#E8F1FB;
 
   /* --- type -------------------------------------------------------------- */
   --font:"Noto Sans","Noto Sans SC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
